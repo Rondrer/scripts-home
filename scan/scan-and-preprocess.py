@@ -40,7 +40,7 @@ outputarg = "--batch=\"out%04d.pnm\" --batch-start=" + str(filecount)
 devicearg = "-d \"brother4:net1;dev0\""
 resolutionarg = "--resolution 300"
 sizearg = "-x 208mm -y 295mm"
-miscargs = "-p"
+miscargs = ""
 
 colorarg = "--mode \"24bit Color\""
 if colorstr.lower() == "gray":
