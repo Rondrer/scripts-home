@@ -23,8 +23,8 @@ ensure_dir(outputpath)
 os.chdir(outputpath)
 
 filecount = 0
-if os.path.exists(os.path.dirname(os.path.realpath(__file__)) + '/cntr'):
-    with open(os.path.dirname(os.path.realpath(__file__)) + '/cntr', 'r') as f:
+if os.path.exists(outputpath + 'cntr'):
+    with open(outputpath + 'cntr'', 'r') as f:
         filecount = int(f.readline())
 
 
@@ -73,7 +73,7 @@ for filename in glob.iglob(outputpath + "/*.pnm"):
     os.remove(unpaperoutputfile)
     os.rename(filename, originaloutputdir + os.path.basename(filename))
     
-with open(os.path.dirname(os.path.realpath(__file__)) + '/cntr', 'w') as f:
+with open(outputpath + 'cntr', 'w') as f:
     f.truncate()
     f.write(str(filecount))
     f.write('\n')
