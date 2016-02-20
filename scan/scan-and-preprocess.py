@@ -24,7 +24,7 @@ os.chdir(outputpath)
 
 filecount = 0
 if os.path.exists(outputpath + 'cntr'):
-    with open(outputpath + 'cntr'', 'r') as f:
+    with open(outputpath + 'cntr', 'r') as f:
         filecount = int(f.readline())
 
 
