@@ -28,12 +28,7 @@ if os.path.exists(outputpath + 'cntr'):
         filecount = int(f.readline())
 
 
-
-originaloutputdir = outputpath + "/original/"
-unpaperoutputdir = outputpath + "/unpapered/"
 pdfoutputdir = outputpath + "/pdf/"
-ensure_dir(originaloutputdir)
-ensure_dir(unpaperoutputdir)
 ensure_dir(pdfoutputdir)
 
 outputarg = "--batch=\"out%04d.pnm\" --batch-start=" + str(filecount)
@@ -59,19 +54,10 @@ subprocess.call(scanimgcmd, shell=True)
 for filename in glob.iglob(outputpath + "/*.pnm"):
     filecount += 1
     basefilename, x = os.path.splitext(os.path.basename(filename));
-    unpaperoutputfile = outputpath + basefilename + ".unpaper.pnm"
-    unpapercmd = "unpaper --layout single " + filename + " " + unpaperoutputfile
-    print unpapercmd
-    subprocess.call(unpapercmd, shell=True)
-    
-    pdffile = unpaperoutputdir + basefilename + ".pdf"
-    pdfcmd = "convert -page A4 " + unpaperoutputfile + " " + pdffile
-    print pdfcmd
-    subprocess.call(pdfcmd, shell=True)
+
     pdfcmd2 = "convert -page A4 " + filename + " " + pdfoutputdir + basefilename + ".pdf"
     subprocess.call(pdfcmd2, shell=True)
-    os.remove(unpaperoutputfile)
-    os.rename(filename, originaloutputdir + os.path.basename(filename))
+    os.remove(filename)
     
 with open(outputpath + 'cntr', 'w') as f:
     f.truncate()
