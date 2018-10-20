@@ -49,14 +49,14 @@ scanimg = ["scanimage", devicearg, outputarg, resolutionarg, sizearg, miscargs, 
 
 scanimgcmd = ' '.join(scanimg)
 print scanimgcmd
-subprocess.call(scanimgcmd, shell=True)
+subprocess.check_call(scanimgcmd, shell=True)
 
 for filename in glob.iglob(outputpath + "/*.pnm"):
     filecount += 1
     basefilename, x = os.path.splitext(os.path.basename(filename));
 
     pdfcmd2 = "convert -page A4 " + filename + " " + pdfoutputdir + basefilename + ".pdf"
-    subprocess.call(pdfcmd2, shell=True)
+    subprocess.check_call(pdfcmd2, shell=True)
     os.remove(filename)
     
 with open(outputpath + 'cntr', 'w') as f:
